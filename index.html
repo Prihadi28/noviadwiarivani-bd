@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Anniversary</title>
+<style>
+/* ==== GLOBAL ==== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+body {
+    background-color: #fff5f5;
+    color: #333;
+    overflow-x: hidden;
+    position: relative;
+}
+/* Floating hearts */
+.heart {
+    position: absolute;
+    pointer-events: none;
+    animation: float 6s ease-in-out infinite;
+    opacity: 0.6;
+    z-index: -1;
+}
+.bg-heart {
+    position: absolute;
+    font-size: 24px;
+    color: rgba(255, 102, 153, 0.3);
+    animation: floatBgHearts 10s linear infinite;
+    pointer-events: none;
+}
+@keyframes floatBgHearts {
+    0% {
+        transform: translateY(0) scale(0.8); /* start in place */
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20vh) scale(1.2); /* float up slightly */
+        opacity: 0;
+    }
+}
+.bg-sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    animation: sparkle 2s infinite ease-in-out;
+}
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+/* ==== HEADER ==== */
+header {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #ff99cc, #ff6699);
+    color: white;
+}
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+.hero-text {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+.typewriter {
+    overflow: hidden;
+    border-right: 3px solid #ff3366;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 2px;
+    animation: blink-caret 0.75s step-end infinite;
+}
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #ff3366; }
+}
+
+/* ==== GALLERY ==== */
+figure {
+    text-align: center;
+    margin: 20px 0;
+}
+
+figcaption {
+    margin-top: 8px;
+    font-size: 1rem;
+    color: #ff3366;
+    font-style: italic;
+}
+.gallery {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+.gallery-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #ff3366;
+}
+.gallery-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+.gallery-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.gallery-slide.active {
+    opacity: 1;
+}
+.gallery-slide img {
+    max-height: 400px;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.caption {
+    margin-top: 15px;
+    font-style: italic;
+    color: #666;
+}
+.gallery-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.gallery-control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.gallery-control.active {
+    background-color: #ff3366;
+}
+
+/* ==== LETTER ==== */
+/* Letter inside view */
+.letter {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #fdfcf7; /* warm paper color */
+    font-family: 'Georgia', serif;
+    box-shadow: 0 0 60px rgba(0,0,0,0.1) inset;
+    border: 1px solid #e0dccc;
+    border-radius: 8px;
+    max-width: 700px;
+    margin: auto;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 28px,
+        rgba(0,0,0,0.04) 29px
+    ); /* faint writing lines */
+}
+.letter:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+/* Letter title */
+.letter-title {
+  font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #c04d4d;
+    text-shadow: 1px 1px 0px #fff;
+}
+
+/* Envelope body */
+.letter-envelope {
+    width: 340px;
+    height: 200px;
+    background: linear-gradient(145deg, #fefaf5, #f7f2e9);
+    margin: 0 auto;
+    position: relative;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e6dfd4;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.letter-envelope:hover {
+    transform: scale(1.03);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+}
+.letter-content {
+    max-width: 600px;
+    margin: 30px auto 0;
+    padding: 40px 30px;
+    background-color: #fffdf9;
+    border-radius: 6px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border: 1px solid #e6e0d5;
+    text-align: left;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #333;
+    display: none;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 32px,
+        rgba(0,0,0,0.04) 33px
+    ); /* faint lines for letter writing */
+}
+.letter-content.show {
+    display: block;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* Envelope body inner gradient for depth */
+.letter-envelope::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.25), rgba(0,0,0,0.05));
+    pointer-events: none;
+}
+
+/* Top flap */
+.letter-envelope::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) rotateX(0deg);
+    transform-origin: top;
+    width: 0;
+    height: 0;
+    border-left: 170px solid transparent;
+    border-right: 170px solid transparent;
+    border-top: 110px solid #ffb6d4;
+    z-index: 3;
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), 
+                border-top-color 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+/* Flap open state */
+.letter-envelope.open::before {
+    transform: translateX(-50%) rotateX(-180deg);
+    border-top-color: #ffe6f2;
+    box-shadow: inset 0 -3px 6px rgba(0,0,0,0.08);
+}
+
+/* Side folds */
+.letter-envelope .fold-left,
+.letter-envelope .fold-right {
+    position: absolute;
+    top: 55px;
+    bottom: 0;
+    width: 50%;
+    background: linear-gradient(135deg, #ffc2da, #ffb3d2);
+    z-index: 1;
+}
+
+.letter-envelope .fold-left {
+    left: 0;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.letter-envelope .fold-right {
+    right: 0;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+
+
+.letter-envelope:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
+}
+
+/* Top flap */
+.letter-envelope:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) rotateX(0deg);
+    transform-origin: top;
+    width: 0;
+    height: 0;
+    border-left: 170px solid transparent;
+    border-right: 170px solid transparent;
+    border-top: 95px solid #ffb3d9; /* Upside-down triangle */
+    z-index: 3;
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* Flap open state */
+.letter-envelope.open:before {
+    transform: translateX(-50%) rotateX(-180deg);
+    border-top-color: #ffe6f0; /* Lighter color for inside flap */
+    box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Bottom flap */
+.letter-envelope:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 170px solid transparent;
+    border-right: 170px solid transparent;
+    border-top: 95px solid #ffb3d9;
+    z-index: 2;
+}
+/* Letter content reveal */
+.letter-content {
+    max-width: 600px;
+    margin: 30px auto 0;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: left;
+    line-height: 1.6;
+    display: none;
+}
+.letter-content.show {
+    display: block;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.letter-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #ff3366;
+}
+.letter-envelope {
+    width: 300px;
+    height: 200px;
+    background: linear-gradient(145deg, #ffd6e7, #ffc2db);
+    margin: 0 auto;
+    position: relative;
+    cursor: pointer;
+    border-radius: 6px 6px 0 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+.letter-envelope:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) rotateX(0deg);
+    transform-origin: top;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 100px solid #ffb3d9;
+    z-index: 3;
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.letter-envelope:hover {
+    transform: translateY(-5px);
+}
+.letter-envelope {
+    width: 300px;
+    height: 200px;
+    background: linear-gradient(145deg, #ffd6e7, #ffc2db);
+    margin: 0 auto;
+    position: relative;
+    cursor: pointer;
+    border-radius: 6px 6px 0 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+.letter-envelope:hover {
+    transform: translateY(-5px);
+}
+.letter-envelope.open:before {
+    transform: translateX(-50%) rotateX(-180deg);
+    border-bottom-color: #ffe6f0;
+    box-shadow: inset 0 -2px 5px rgba(0,0,0,0.1);
+}
+.letter-envelope:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-top: 100px solid #ffb3d9;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    z-index: 2;
+}
+.letter-content {
+    max-width: 600px;
+    margin: 30px auto 0;
+    padding: 30px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: left;
+    line-height: 1.6;
+    display: none;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.6s ease;
+}
+.letter-envelope.open:after {
+    transform: translateX(-50%) rotateX(-180deg);
+}
+.letter-content.show {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ==== FOOTER ==== */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #ff6699, #ff3366);
+    color: white;
+}
+.footer-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+.footer-text {
+    font-size: 1.2rem;
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    .hero-text { font-size: 1.2rem; }
+    .gallery-container { height: 400px; }
+}
+.floating-heart {
+    position: fixed;
+    bottom: 50px;
+    animation: floatUp 3s ease forwards;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-100px) scale(1.3); opacity: 0.8; }
+    100% { transform: translateY(-200px) scale(0.8); opacity: 0; }
+}
+.scattered-heart {
+    position: fixed;
+    font-size: 20px;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Happy 22nd Birthday, My Love</h1>
+    <div class="hero-text typewriter" id="typewriter">Every day with you is a blessing...</div>
+</header>
+
+<section class="gallery">
+    <h2 class="gallery-title">Our Beautiful Memories</h2>
+    <div class="gallery-container">
+        <div class="gallery-slide active">
+            <img src="12.png">
+            <div class="caption">Our first meet eachother</div>
+        </div>
+        <div class="gallery-slide">
+            <img src="1.jpg">
+            <div class="caption">Celebrating special moments</div>
+        </div>
+        <div class="gallery-slide">
+            <img src="2.jpg">
+            <div class="caption">Simple happiness together</div>
+        </div>
+        <div class="gallery-slide">
+            <img src="3.jpg">
+            <div class="caption">Love that grows stronger</div>
+        </div>
+    </div>
+    <div class="gallery-controls">
+        <div class="gallery-control active" data-index="0"></div>
+        <div class="gallery-control" data-index="1"></div>
+        <div class="gallery-control" data-index="2"></div>
+        <div class="gallery-control" data-index="3"></div>
+    </div>
+</section>
+
+<section class="letter">
+    <h2 class="letter-title">A Letter For You</h2>
+    <div class="letter-envelope" id="envelope"></div>
+    <div class="letter-content" id="letter">
+        <p><b>Happy Birthday, Sayangggg,</b></p>
+        <p><i>Today is all about celebrating you the incridible person  who brings so much joy, love and light into my life. i fell lucky to call you mine. you shown me what true love feels like, and every day with you is a beautiful adventure.<i></p>
+        <p><i>?I love everything about you your smile, your laugh, your strenght, your kindness, you make me feel safe, supported, and deeply loved, i'm so proud of the person you are and everything you're becoming.<i></p>
+        <p><i>On Your Birthday, I want you to know that my love for you grows stronger every day. I cherish every moment we've shared and look forward to countless more memories together.</p>
+        <p><i>I Love You In Every Universe <b>Novia Dwi Arivani Utomo</b><i></p>
+        <p><b>Prima A</b></p>
+    </div>
+</section>
+
+<footer>
+    <h2 class="footer-title">I Love You More Each Day</h2>
+    <p class="footer-text">Thank you for being you and for sharing your life with me.</p>
+</footer>
+
+<script>
+// Floating hearts
+function createHearts() {
+    const heart = document.createElement('div');
+    heart.innerHTML = '❤️';
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.top = Math.random() * 100 + 'vh';
+    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 10000);
+}
+setInterval(createHearts, 500);
+
+// Typewriter effect
+const texts = [
+    "Every day with you is a blessing...",
+    "You make my life so beautiful...",
+    "I love you more than words can say...",
+    "Happy anniversary to the love of my life..."
+];
+let textIndex = 0, charIndex = 0;
+const typewriterEl = document.getElementById('typewriter');
+function typeWriter() {
+    if (charIndex < texts[textIndex].length) {
+        typewriterEl.textContent = texts[textIndex].substring(0, charIndex + 1);
+        charIndex++;
+        setTimeout(typeWriter, 100);
+    } else {
+        setTimeout(eraseText, 2000);
+    }
+}
+function eraseText() {
+    if (charIndex > 0) {
+        typewriterEl.textContent = texts[textIndex].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(eraseText, 50);
+    } else {
+        textIndex = (textIndex + 1) % texts.length;
+        setTimeout(typeWriter, 500);
+    }
+}
+typeWriter();
+
+// Gallery
+const slides = document.querySelectorAll('.gallery-slide');
+const controls = document.querySelectorAll('.gallery-control');
+let currentSlide = 0;
+function showSlide(index) {
+    slides.forEach(s => s.classList.remove('active'));
+    controls.forEach(c => c.classList.remove('active'));
+    slides[index].classList.add('active');
+    controls[index].classList.add('active');
+    currentSlide = index;
+}
+controls.forEach(c => c.addEventListener('click', () => showSlide(parseInt(c.dataset.index))));
+setInterval(() => showSlide((currentSlide + 1) % slides.length), 5000);
+
+// Envelope
+const envelope = document.getElementById('envelope');
+const letter = document.getElementById('letter');
+
+envelope.addEventListener('click', () => {
+    envelope.classList.toggle('open');
+
+    if (envelope.classList.contains('open')) {
+        setTimeout(() => {
+            letter.classList.add('show');
+            scatterHearts(); // ❤️ spread hearts in all directions
+        }, 500);
+    } else {
+        letter.classList.remove('show');
+    }
+});
+
+function scatterHearts() {
+    const rect = envelope.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'scattered-heart';
+        heart.innerHTML = '❤️';
+        document.body.appendChild(heart);
+
+        // Start position at envelope center
+        heart.style.left = `${centerX}px`;
+        heart.style.top = `${centerY}px`;
+
+        // Random angle & distance
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = Math.random() * 200 + 100; // spread distance
+        const targetX = centerX + Math.cos(angle) * distance;
+        const targetY = centerY + Math.sin(angle) * distance;
+
+        heart.animate([
+            { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+            { transform: `translate(${targetX - centerX}px, ${targetY - centerY}px) scale(0.6)`, opacity: 0 }
+        ], {
+            duration: 1500 + Math.random() * 500,
+            easing: 'ease-out',
+            fill: 'forwards'
+        });
+
+        setTimeout(() => heart.remove(), 2000);
+    }
+}
+// Create floating hearts
+// Create floating hearts at random positions
+for (let i = 0; i < 20; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'bg-heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = `${Math.random() * 100}vw`;
+    heart.style.top = `${Math.random() * 100}vh`; // random start position
+    heart.style.animationDuration = `${8 + Math.random() * 6}s`;
+    heart.style.fontSize = `${16 + Math.random() * 20}px`;
+    document.body.appendChild(heart);
+}
+
+// Create sparkles
+for (let i = 0; i < 50; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'bg-sparkle';
+    sparkle.style.left = `${Math.random() * 100}vw`;
+    sparkle.style.top = `${Math.random() * 100}vh`;
+    sparkle.style.animationDelay = `${Math.random() * 2}s`;
+    document.body.appendChild(sparkle);
+}
+const bgMusic = document.getElementById('bg-music');
+
+envelope.addEventListener('click', () => {
+    // Play music instantly on click
+    bgMusic.currentTime = 0;
+    bgMusic.play().catch(err => {
+        console.log("Playback blocked:", err);
+    });
+
+    envelope.classList.toggle('open');
+    if (envelope.classList.contains('open')) {
+        setTimeout(() => letter.classList.add('show'), 500);
+    } else {
+        letter.classList.remove('show');
+        bgMusic.pause();
+    }
+});
+</script>
+<audio id="bg-music" src="mn.mp3" preload="auto"></audio>
+</body>
+</html>
