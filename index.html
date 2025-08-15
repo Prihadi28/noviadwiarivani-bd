@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Anniversary</title>
+<title>Novia Dwi Arivani Birthday</title>
 <style>
 /* ==== GLOBAL ==== */
 * {
@@ -509,13 +509,27 @@ footer {
     pointer-events: none;
     z-index: 9999;
 }
+.caption {
+    margin-top: 15px;
+    font-style: italic;
+    color: #666;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.gallery-slide.active .caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 </style>
 </head>
 <body>
 
 <header>
-    <h1>Happy 22nd Birthday, My Love</h1>
+    <h1>Happy 22nd Birthday, My Love Novia Dwi Arivani Utomo ❤️</h1>
     <div class="hero-text typewriter" id="typewriter">Every day with you is a blessing...</div>
 </header>
 
@@ -556,7 +570,7 @@ footer {
         <p><i>I love everything about you your smile, your laugh, your strenght, your kindness, you make me feel safe, supported, and deeply loved, i'm so proud of the person you are and everything you're becoming.<i></p>
         <p><i>On Your Birthday, I want you to know that my love for you grows stronger every day. I cherish every moment we've shared and look forward to countless more memories together.</p>
         <p><i>I Love You In Every Universe <b>Novia Dwi Arivani Utomo</b><i></p>
-        <p><b>Prima A</b></p>
+        <p><b>*PAHS*</b></p>
     </div>
 </section>
 
@@ -585,7 +599,7 @@ const texts = [
     "Every day with you is a blessing...",
     "You make my life so beautiful...",
     "I love you more than words can say...",
-    "Happy Birthday to the love of my life..."
+    "Happy anniversary to the love of my life..."
 ];
 let textIndex = 0, charIndex = 0;
 const typewriterEl = document.getElementById('typewriter');
